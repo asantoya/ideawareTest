@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :tasks do
       member do 
-        post :start_tracking
+        post :set_time_tracking
         post :stop_tracking
       end
     end
