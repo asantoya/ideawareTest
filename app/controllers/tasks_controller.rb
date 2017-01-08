@@ -23,11 +23,12 @@ class TasksController < ApplicationController
     @tasks = @user.tasks.all
   end
 
-  def start_tracking
+  def set_time_tracking
     @task = Task.find(params[:id])
-    @task.update_attributes(start_date:Time.now)
-    redirect_to user_task_path(current_user, @task), :notice => "  task created!"
-    
+    @task.update_attributes(duration:params[:duration])
+    respond_to do |format|
+      format.json {render json: @task.duration}
+    end
   end
  
 private

@@ -21,6 +21,16 @@ $(document).ready ->
     $('.timer').timer 'pause'
     $(this).addClass 'hide'
     $('.resume-timer-btn').removeClass 'hide'
+    taskId = $('.task').attr('task-id')
+    userId = $('.task').attr('user-id')
+    $.ajax
+      url: '/users/' + userId + '/tasks/' + taskId + '/set_time_tracking'
+      type: 'POST'
+      dataType: 'json'
+      data: 'duration': $('.timer').data('seconds')
+      success: (data) ->
+        console.log 'successfully ' + data
+        return
     return
   # Remove timer
   $('.remove-timer-btn').on 'click', ->
